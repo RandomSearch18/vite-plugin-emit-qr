@@ -9,7 +9,10 @@
  * @param type The MIME type of the file/data, e.g. `text/html`
  */
 export function toDataUri(data: string, type: string): string {
-  const encodedData = data.replaceAll("#", "%23").replaceAll("%", "%25")
+  const encodedData = data
+    .replaceAll("#", "%23")
+    .replaceAll("%", "%25")
+    .replaceAll("\n", "%0A")
   const uri = `data:${type},${encodedData}`
   return uri
 }
