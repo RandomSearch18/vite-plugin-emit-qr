@@ -7,7 +7,9 @@ import EmitQR from "../src/index.ts"
 const config: UserConfig = {
   plugins: [
     Inspect(),
-    viteSingleFile(),
+    viteSingleFile({
+      removeViteModuleLoader: true,
+    }),
     createHtmlPlugin({
       minify: true,
     }),
