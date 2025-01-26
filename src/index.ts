@@ -40,15 +40,15 @@ export default function EmitQR(specifiedConfig: Partial<EmitQRConfig>): Plugin {
     configResolved(resolvedConfig) {
       viteConfig = resolvedConfig
     },
-    transformIndexHtml(html: string) {
+    async transformIndexHtml(html: string) {
       const dataUri = toDataUri(html, "text/html")
-      console.log(dataUri)
       const viteOutputDir = path.resolve(
         viteConfig.root,
         viteConfig.build.outDir
       )
       const qrDirectory = path.join(viteOutputDir, config.outputDir)
-      mkdir(qrDirectory, { recursive: true })
+
+      await mkdir(qrDirectory, { recursive: true })
       const qrPath = path.join(qrDirectory, config.fileName)
       qrcode.toFile(qrPath, dataUri, {
         type: config.fileType,
