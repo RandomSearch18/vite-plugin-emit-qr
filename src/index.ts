@@ -1,30 +1,22 @@
-import { Plugin } from "vite"
+import { Plugin, ResolvedConfig } from "vite"
 import { toDataUri } from "./dataUri.ts"
-import { toFile } from "qrcode"
+import qrcode from "qrcode"
+import path from "node:path"
 
 export default function EmitQR(): Plugin {
+  let viteConfig: ResolvedConfig
+
   return {
     name: "emit-qr",
-    buildEnd() {
-      for (const moduleId of this.getModuleIds()) {
-        console.log(
-          moduleId,
-          // this.getFileName(moduleId),
-          this.getModuleInfo(moduleId)
-        )
-      }
+    configResolved(resolvedConfig) {
+      viteConfig = resolvedConfig
     },
     transformIndexHtml(html: string) {
-      // const dataUri = toDataUri(html, "text/html")
-      // console.log(dataUri)
-      // console.log(this, global)
-      // this.warn("aaa")
-      // // @ts-ignore
-      // this.emitFile({
-      //   type: "asset",
-      //   fileName: "text.txt",
-      //   source: dataUri,
-      // })
+      const dataUri = toDataUri(html, "text/html")
+      console.log(dataUri)
+      const outputDir = path.resolve(viteConfig.root, viteConfig.build.outDir)
+      const qrPath = path.join(outputDir, "index.html.png")
+      qrcode.toFile(qrPath, dataUri)
     },
   }
 }
