@@ -81,7 +81,6 @@ export default function EmitQR(config: EmitQRConfig): Plugin {
           viteConfig.build.outDir,
           "index.html"
         )
-        console.log(htmlFilePath)
         const html = await readFile(htmlFilePath, "utf-8")
         // console.log(html)
         // Note: This assumes that NODE_ENV is always and only set to `production` during `vite build`
@@ -95,12 +94,14 @@ export default function EmitQR(config: EmitQRConfig): Plugin {
             viteConfig.build.outDir,
             buildConfig.outputDir
           )
+          this.info(`Saving QR code to ${outputDir}/${buildConfig.fileName}`)
           return writeQR(dataUri, [outputDir], buildConfig.fileName, {
             type: buildConfig.fileType,
           })
         }
         // If the dev server is being run, output the QR code to the project root
         const outputDir = path.resolve(viteConfig.root, devConfig.outputDir)
+        this.info(`Saving QR code to ${outputDir}/${devConfig.fileName}`)
         return writeQR(dataUri, [outputDir], devConfig.fileName, {
           type: devConfig.fileType,
         })
