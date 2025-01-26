@@ -77,6 +77,10 @@ EmitQR({
 })
 ```
 
+## Justification for being a Vite-only plugin
+
+`vite-plugin-emit-qr` relies on the fact that Vite projects are based around a single `index.html` file, because it's designed to encode a single file (with the code for a web app) into a QR code. In addition, the plugin makes the most sense when used in combination with other Vite-specific plugins, namely `vite-plugin-singlefile` and `vite-plugin-html`.
+
 ## Credits
 
 - I looked at [the code for `vite-plugin-html`](https://github.com/vbenjs/vite-plugin-html/blob/main/packages/core/src/htmlPlugin.ts) to help me work out how to work with the built HTML output from Vite
