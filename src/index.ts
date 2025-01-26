@@ -69,13 +69,14 @@ export default function EmitQR(config: EmitQRConfig): Plugin {
 
   return {
     name: "emit-qr",
+    enforce: "post",
     configResolved(resolvedConfig) {
       viteConfig = resolvedConfig
     },
     transformIndexHtml: {
       order: "post",
       handler: async (html: string, ctx) => {
-        // console.log(html)
+        console.log(html)
         const isBuild = !!ctx.bundle
         const dataUri = toDataUri(html, "text/html")
         if (isBuild) {
