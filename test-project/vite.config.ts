@@ -7,7 +7,8 @@ const config: UserConfig = {
     Inspect(),
     // @ts-ignore Typescript doesn't think that the Plugin types from two different installations of Vite are compatible
     EmitQR({
-      outputDir: "nice folder",
+      buildOutput: { outputDir: "nice folder", fileName: "nice.png" },
+      devServerOutput: { outputDir: "images", fileName: "not-nice.png" },
     }),
   ],
 }
