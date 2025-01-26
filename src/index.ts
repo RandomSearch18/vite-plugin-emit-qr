@@ -2,7 +2,7 @@ import { Plugin, ResolvedConfig } from "vite"
 import { toDataUri } from "./dataUri.ts"
 import qrcode, { QRCodeToFileOptions } from "qrcode"
 import path from "node:path"
-import { mkdir } from "node:fs/promises"
+import { mkdir, readFile } from "node:fs/promises"
 
 interface EmitQROutputOptions {
   /** The name of the QR code image file, including the file extension
@@ -73,11 +73,20 @@ export default function EmitQR(config: EmitQRConfig): Plugin {
     configResolved(resolvedConfig) {
       viteConfig = resolvedConfig
     },
-    transformIndexHtml: {
+    closeBundle: {
       order: "post",
-      handler: async (html: string, ctx) => {
-        console.log(html)
-        const isBuild = !!ctx.bundle
+      handler: async function () {
+        const htmlFilePath = path.join(
+          viteConfig.root,
+          viteConfig.build.outDir,
+          "index.html"
+        )
+        console.log(htmlFilePath)
+        const html = await readFile(htmlFilePath, "utf-8")
+        // console.log(html)
+        // Note: This assumes that NODE_ENV is always and only set to `production` during `vite build`
+        // Perhaps some property on `this` would be a more reliable indicator
+        const isBuild = process.env.NODE_ENV === "production"
         const dataUri = toDataUri(html, "text/html")
         if (isBuild) {
           // If the app is being built, output the QR code to the Vite output (dist) directory
