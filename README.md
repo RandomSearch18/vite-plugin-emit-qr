@@ -43,6 +43,12 @@ const config = {
 export default config
 ```
 
+## Details
+
+The plugin runs using the `closeBundle` hook (with `post` ordering), which means it runs after every other Vite plugin. This ensures that the `index.html` file that it exports as a QR code is the final form of the file, with any transformations (e.g. minification) from plugins included.
+
+This is my first time creating a Vite plugin, so feel free to leave feedback or suggestions!
+
 ## Configuration
 
 Configure the plugin by providing it an object with the `buildOutput` and `devServerOutput` properties, to configure the options for when your app is being built, or when the dev server is used, respectively. Each of those properties can contain the following options:
