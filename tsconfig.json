@@ -14,10 +14,8 @@
     /* Linting */
     "strict": true,
     "noFallthroughCasesInSwitch": true,
-    "noUncheckedSideEffectImports": true
-  },
-  "buildOptions": {
-    "outDir": "dist-a"
+    "noUncheckedSideEffectImports": true,
+    "outDir": "dist"
   },
   "include": ["src"],
   "exclude": ["node_modules", "test-project"]
