@@ -10,8 +10,8 @@
  */
 export function toDataUri(data: string, type: string): string {
   const encodedData = data
-    .replaceAll("#", "%23")
     .replaceAll("%", "%25")
+    .replaceAll("#", "%23")
     .replaceAll("\n", "%0A")
   const uri = `data:${type},${encodedData}`
   return uri
