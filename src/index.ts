@@ -72,25 +72,29 @@ export default function EmitQR(config: EmitQRConfig): Plugin {
     configResolved(resolvedConfig) {
       viteConfig = resolvedConfig
     },
-    async transformIndexHtml(html: string, ctx) {
-      const isBuild = !!ctx.bundle
-      const dataUri = toDataUri(html, "text/html")
-      if (isBuild) {
-        // If the app is being built, output the QR code to the Vite output (dist) directory
-        const outputDir = path.resolve(
-          viteConfig.root,
-          viteConfig.build.outDir,
-          buildConfig.outputDir
-        )
-        return writeQR(dataUri, [outputDir], buildConfig.fileName, {
-          type: buildConfig.fileType,
+    transformIndexHtml: {
+      order: "post",
+      handler: async (html: string, ctx) => {
+        // console.log(html)
+        const isBuild = !!ctx.bundle
+        const dataUri = toDataUri(html, "text/html")
+        if (isBuild) {
+          // If the app is being built, output the QR code to the Vite output (dist) directory
+          const outputDir = path.resolve(
+            viteConfig.root,
+            viteConfig.build.outDir,
+            buildConfig.outputDir
+          )
+          return writeQR(dataUri, [outputDir], buildConfig.fileName, {
+            type: buildConfig.fileType,
+          })
+        }
+        // If the dev server is being run, output the QR code to the project root
+        const outputDir = path.resolve(viteConfig.root, devConfig.outputDir)
+        return writeQR(dataUri, [outputDir], devConfig.fileName, {
+          type: devConfig.fileType,
         })
-      }
-      // If the dev server is being run, output the QR code to the project root
-      const outputDir = path.resolve(viteConfig.root, devConfig.outputDir)
-      return writeQR(dataUri, [outputDir], devConfig.fileName, {
-        type: devConfig.fileType,
-      })
+      },
     },
   }
 }
