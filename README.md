@@ -13,3 +13,14 @@ This is a Vite plugin that takes the built `index.html` file, encodes it as a `d
 ## Example usage
 
 Here's an example of using this plugin alongside `vite-plugin-singlefile` and `vite-plugin-html`, as recommended above:
+
+```js
+// TODO
+```
+
+## Credits
+
+- I looked at [the code for `vite-plugin-html`](https://github.com/vbenjs/vite-plugin-html/blob/main/packages/core/src/htmlPlugin.ts) to help me work out how to work with the built HTML output from Vite
+- Also thank you to `vite-plugin-html` for helping me discover the `html-minifier-terser` library
+- The [`html-minifier-terser`](https://www.npmjs.com/package/html-minifier-terser) library let me easily add HTML minification support to this plugin
+- I also used the [`node-qrcode`](https://www.npmjs.com/package/qrcode) library to generate the QR code image, which is obviously a pretty important part of this plugin
