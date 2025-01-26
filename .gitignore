@@ -21,3 +21,4 @@ test-project/images
 !.yarn/releases
 !.yarn/sdks
 !.yarn/versions
+test-project/.yarn
