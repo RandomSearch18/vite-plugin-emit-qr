@@ -1,5 +1,5 @@
 import { Plugin, ResolvedConfig } from "vite"
-import { toDataUri } from "./dataUri.ts"
+import { toDataUri } from "./dataUri.js"
 import qrcode, { QRCodeToFileOptions } from "qrcode"
 import path from "node:path"
 import { mkdir, readFile } from "node:fs/promises"

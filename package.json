@@ -9,7 +9,9 @@
   ],
   "main": "src/index.ts",
   "type": "module",
-  "scripts": {},
+  "scripts": {
+    "build": "tsc"
+  },
   "devDependencies": {
     "@types/node": "^22.10.7",
     "@types/qrcode": "^1.5.5",
