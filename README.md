@@ -14,13 +14,72 @@ This is a Vite plugin that takes the built `index.html` file, encodes it as a `d
 
 Here's an example of using this plugin alongside `vite-plugin-singlefile` and `vite-plugin-html`, as recommended above:
 
+`vite.config.js`:
+
 ```js
-// TODO
+const config = {
+  plugins: [
+    viteSingleFile(),
+    createHtmlPlugin({
+      minify: true,
+    }),
+    EmitQR({
+      // Options for when `vite build` is run:
+      buildOutput: {
+        // Save the QR code as my-app.png in the build output folder (i.e. dist/)
+        fileName: "my-app.png",
+      },
+      // Options for when `vite` is run (to start the dev server):
+      devServerOutput: {
+        // Save the QR code as my-app.png in the public/ folder
+        outputDir: "public",
+        fileName: "my-app.png",
+      },
+    }),
+  ],
+}
+
+export default config
+```
+
+## Configuration
+
+Configure the plugin by providing it an object with the `buildOutput` and `devServerOutput` properties, to configure the options for when your app is being built, or when the dev server is used, respectively. Each of those properties can contain the following options:
+
+- `fileName`: The name of the QR code image file, including the file extension
+  - Should end in `.png` (or another appropriate file extension as per the `fileType` option)
+  - Default: `"index.html.png"`
+  - Example: `"my-app.png"`
+- `fileType`: The file type to output the QR code as
+  - Currently, `svg` or `png` are supported
+  - Default: `"png"`
+  - Example: `"svg"` to output it as an SVG file
+- `outputDir`: The directory to write the QR code image file to
+  - During a build, this path is relative to the Vite output directory (`dist/` by default)
+  - During development, this path is relative to the root of the project (where `vite.config.js` and `index.html` usually are)
+  - Defaults to no subdirectory, i.e. the root of the output directory or project
+  - Example: `"public"`, `"docs/assets"`
+
+### Example with all options
+
+```js
+EmitQR({
+  buildOutput: {
+    fileName: "my-app.png",
+    fileType: "png",
+    outputDir: "public",
+  },
+  devServerOutput: {
+    fileName: "qr-code.svg",
+    fileType: "svg",
+    outputDir: "public",
+  },
+})
 ```
 
 ## Credits
 
 - I looked at [the code for `vite-plugin-html`](https://github.com/vbenjs/vite-plugin-html/blob/main/packages/core/src/htmlPlugin.ts) to help me work out how to work with the built HTML output from Vite
-- Also thank you to `vite-plugin-html` for helping me discover the `html-minifier-terser` library
-- The [`html-minifier-terser`](https://www.npmjs.com/package/html-minifier-terser) library let me easily add HTML minification support to this plugin
-- I also used the [`node-qrcode`](https://www.npmjs.com/package/qrcode) library to generate the QR code image, which is obviously a pretty important part of this plugin
+<!-- - Also thank you to `vite-plugin-html` for helping me discover the `html-minifier-terser` library
+- The [`html-minifier-terser`](https://www.npmjs.com/package/html-minifier-terser) library let me easily add HTML minification support to this plugin -->
+- I used the [`node-qrcode`](https://www.npmjs.com/package/qrcode) library to generate the QR code image, which is obviously a pretty important part of this plugin
