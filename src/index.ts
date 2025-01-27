@@ -97,6 +97,7 @@ export default function EmitQR(config: EmitQRConfig): Plugin {
           this.info(`Saving QR code to ${outputDir}/${buildConfig.fileName}`)
           return writeQR(dataUri, [outputDir], buildConfig.fileName, {
             type: buildConfig.fileType,
+            errorCorrectionLevel: "L",
           })
         }
         // If the dev server is being run, output the QR code to the project root
