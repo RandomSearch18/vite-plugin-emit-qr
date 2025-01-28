@@ -23,7 +23,8 @@
       "command": "cd test-project && yarn build && yarn preview",
       "preview": {
         "port": 4173
-      }
+      },
+      "runAtStart": true
     }
   }
 }
