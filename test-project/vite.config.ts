@@ -5,6 +5,9 @@ import { createHtmlPlugin } from "vite-plugin-html"
 import EmitQR from "../src/index.ts"
 
 const config: UserConfig = {
+  server: {
+    allowedHosts: [".csb.app"],
+  },
   plugins: [
     Inspect(),
     viteSingleFile({
