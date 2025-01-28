@@ -22,6 +22,8 @@ View the demo and play with the plugin on CodeSandbox: **<https://codesandbox.io
 5. Experience the simple demo web app
 6. Click the link to **/qr.png** to view the QR code that has been generated from the web app source
 
+![Screenshot of the CodeSandbox demo, showing the basic Vite app preview and the generated QR code](codesandbox-demo.png)
+
 ## Example usage
 
 Here's an example of using this plugin alongside `vite-plugin-singlefile` and `vite-plugin-html`, as recommended above:
