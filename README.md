@@ -11,6 +11,17 @@ This is a Vite plugin that takes the built `index.html` file, encodes it as a `d
   - This plugin will encode your HTML file as-is, so it's recommended to use a plugin like [`vite-plugin-html`](https://github.com/vbenjs/vite-plugin-html) to minify your HTML file first
   - To keep size down, you should also ensure any CSS and JS is minified
 
+## Demo
+
+View the demo and play with the plugin on CodeSandbox: **<https://codesandbox.io/p/github/RandomSearch18/vite-plugin-emit-qr/main>**
+
+1. Wait for the CodeSandBox microVM to load
+2. Wait for dependencies to automatically be built and installed
+3. Wait for the "Build & preview test project" preview to load
+4. If the preview doesn't appear automatically, click the **Build & preview test project:4173** button to open the preview
+5. Experience the simple demo web app
+6. Click the link to **/qr.png** to view the QR code that has been generated from the web app source
+
 ## Example usage
 
 Here's an example of using this plugin alongside `vite-plugin-singlefile` and `vite-plugin-html`, as recommended above:
