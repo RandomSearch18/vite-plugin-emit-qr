@@ -20,8 +20,7 @@ const config: UserConfig = {
     EmitQR({
       buildOutput: {
         //
-        outputDir: "nice-folder",
-        fileName: "nice.png",
+        fileName: "qr.png",
       },
       devServerOutput: {
         //
