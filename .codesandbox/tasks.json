@@ -1,0 +1,26 @@
+{
+  // These tasks will run in order when initializing your CodeSandbox project.
+  "setupTasks": [
+    {
+      "command": "yarn install",
+      "name": "Install Dependencies"
+    },
+    {
+      "command": "yarn build",
+      "name": "Build plugin"
+    },
+    {
+      "command": "cd test-project && yarn install",
+      "name": "Install test-project deps"
+    }
+  ],
+
+  // These tasks can be run from CodeSandbox. Running one will open a log in the app.
+  "tasks": {
+    "build": {
+      "name": "Launch test project",
+      "command": "cd test-project && yarn dev",
+      "runAtStart": false
+    }
+  }
+}
