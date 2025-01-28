@@ -24,8 +24,8 @@ const config: UserConfig = {
       },
       devServerOutput: {
         //
-        outputDir: "images",
-        fileName: "not-nice.png",
+        outputDir: "public",
+        fileName: "qr.png",
       },
     }),
   ],
